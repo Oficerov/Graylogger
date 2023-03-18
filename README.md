@@ -1,4 +1,4 @@
-# Graylog Handlers
+# Graylogger
 [![License: MIT](https://badgen.net/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 [![repo](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/Oficerov/graylogger)
 [![pypi](https://badgen.net/badge/icon/pypi?color=yellow&icon=pypi&label)](https://pypi.org/project/graylogger/)
@@ -8,7 +8,7 @@
 Перебрав все более-менее нормальные библиотеки для работы с gelp http graylog, не нашел ни одной,
 которая бы работала так, как от нее ожидается. Некоторые вообще не шлют логи, другие теряют сообщения.
 
-Тогда, на выходных, я решил написать свой мини-хендлер graylog для библиотеки logger для использования в своих проектах.
+Тогда, на выходных, я решил написать свой мини-хендлер graylog для библиотеки logging для использования в своих проектах.
 Так родилась эта библиотека. Возможно, она сэкономит кому-то несколько часов времени.
 
 ### Примеры использования:
@@ -24,9 +24,14 @@
 
     logger = logging.getLogger(logger_name)
     logger.setLevel(logging.INFO)
+    
+    # Пример создания хэндлера graylog располагающегося по адресу: http://yourgraylog.ru:80/gelf
     handler = HTTPHandler(host='yourgraylog.ru', path='/gelf', port=80)
+    # Пример добавления кастомного поля
     handler.add_field(name='castom_field_name', content='castom_field_content')
+    
     logger.addHandler(handler)
+    logger.info('Test message to graylog from graylogger')
 
 ---
 ### Возможные ошибки и их решение:
